@@ -152,7 +152,7 @@ public class TVector {
 class Test{
 public static void main(String[] args)throws IOException{
 
-	System.out.println("Test start");
+	System.out.println("Test start\r\n");
 
 	System.out.println("generate vector v1");
 
@@ -167,11 +167,10 @@ public static void main(String[] args)throws IOException{
 	}
 
 	String string2=v1.toString();
-	System.out.println("Dimension, elements was set v1:"+string2);
+	System.out.println("Dimension, elements was set v1:"+string2+"\r\n");
 
 	System.out.println("copy test");
 
-	System.out.println("Compared with v1");
 
 	TVector v2=new TVector(v1);
 
@@ -210,6 +209,7 @@ public static void main(String[] args)throws IOException{
 
 
 
+	System.out.println("Compared with v1");
 
 
 	System.out.println("TVector(v1);"+v1.equals(v2));
@@ -217,9 +217,9 @@ public static void main(String[] args)throws IOException{
 	System.out.println("v4=v1;"+v1.equals(v4));
 	System.out.println("v1.copyFrom(v1);"+v1.equals(v5));
 	System.out.println("v6.copuFrom(v1);"+v1.equals(v6));
-	System.out.println("Write,read;"+v1.equals(v7));
+	System.out.println("Write,read;"+v1.equals(v7)+"\r\n");
 
-	System.out.println("v1 is changed");
+	System.out.println("v1 is changed\r\n");
 
 	v1.setElement(2, 10);
 	System.out.println("v1:"+v1);
@@ -229,10 +229,10 @@ public static void main(String[] args)throws IOException{
 	System.out.println("v4=v1;"+v1.equals(v4));
 	System.out.println("v1.copyFrom(v1);"+v1.equals(v5));
 	System.out.println("v6.copuFrom(v1);"+v1.equals(v6));
-	System.out.println("Write,read;"+v1.equals(v7));
+	System.out.println("Write,read;"+v1.equals(v7)+"\r\n");
 
 
-	System.out.println("generate new vector v8");
+	System.out.println("generate new vector v8"+"\r\n");
 
 	TVector v8=new TVector();
 	v8.setDimension(4);
@@ -256,10 +256,10 @@ public static void main(String[] args)throws IOException{
 	System.out.println("naiseki v1 and v8"+v9.innerProduct(v8));
 	System.out.println("v1*4="+v9.scalarProduct(4));
 	v9=v1.clone();
-	System.out.println("elementwise product v1 and v8 ="+v9.elementwiseProduct(v8));
+	System.out.println("elementwise product v1 and v8 ="+v9.elementwiseProduct(v8)+"\r\n");
 
 
-	System.out.println("Indivisual test");
+	System.out.println("Indivisual test"+"\r\n");
 
 	TIndivisual In1=new TIndivisual();
 	In1.setEvaluationValue(8);
@@ -293,10 +293,10 @@ public static void main(String[] args)throws IOException{
 
     In3 = In1.clone();
 
-    System.out.println("In3, cloned:"+In3);
+    System.out.println("In3, cloned:"+In3+"\r\n");
 
 
-    System.out.println("set vector without setVector(v)");
+    System.out.println("set vector without setVector(v)\r\n");
 
     TVector v10= new TVector();
 
@@ -312,7 +312,7 @@ public static void main(String[] args)throws IOException{
     In4.setEvaluationValue(33.4);
     In4.getVector().copyFrom(v10);
 
-    System.out.println("set vector v10:"+In4);
+    System.out.println("set vector v10:"+In4+"\r\n");
 
     v10.setElement(1,9999);
 
