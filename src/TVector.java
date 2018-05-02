@@ -152,9 +152,13 @@ public class TVector {
 class Test{
 public static void main(String[] args)throws IOException{
 
+	System.out.println("Test start");
+
+	System.out.println("generate vector v1");
+
 	TVector v1=new TVector();
 	String string1=v1.toString();
-	System.out.println("First v1:"+string1);
+	System.out.println("just new v1:"+string1);
 
 	v1.setDimension(4);
 	for(int i=0;i<v1.getDimension();++i){
@@ -163,9 +167,11 @@ public static void main(String[] args)throws IOException{
 	}
 
 	String string2=v1.toString();
-	System.out.println("second v1:"+string2);
+	System.out.println("Dimension, elements was set v1:"+string2);
 
 	System.out.println("copy test");
+
+	System.out.println("Compared with v1");
 
 	TVector v2=new TVector(v1);
 
@@ -225,6 +231,9 @@ public static void main(String[] args)throws IOException{
 	System.out.println("v6.copuFrom(v1);"+v1.equals(v6));
 	System.out.println("Write,read;"+v1.equals(v7));
 
+
+	System.out.println("generate new vector v8");
+
 	TVector v8=new TVector();
 	v8.setDimension(4);
 	for(int i=0;i<v8.getDimension();++i ){
@@ -244,7 +253,7 @@ public static void main(String[] args)throws IOException{
 	System.out.println("Norm of normalized:"+v9.calculateL2norm());
 
 	v9=v1.clone();
-	System.out.println("naiseki"+v9.innerProduct(v8));
+	System.out.println("naiseki v1 and v8"+v9.innerProduct(v8));
 	System.out.println("v1*4="+v9.scalarProduct(4));
 	v9=v1.clone();
 	System.out.println("elementwise product v1 and v8 ="+v9.elementwiseProduct(v8));
@@ -285,6 +294,34 @@ public static void main(String[] args)throws IOException{
     In3 = In1.clone();
 
     System.out.println("In3, cloned:"+In3);
+
+
+    System.out.println("set vector without setVector(v)");
+
+    TVector v10= new TVector();
+
+    v10.setDimension(5);
+    for(int i=0;i<v10.getDimension();++i) {
+    	v10.setElement(i,i*2+6);
+    }
+
+    System.out.println("Generated vector v10:"+v10);
+
+    TIndivisual In4= new TIndivisual();
+
+    In4.setEvaluationValue(33.4);
+    In4.getVector().copyFrom(v10);
+
+    System.out.println("set vector v10:"+In4);
+
+    v10.setElement(1,9999);
+
+
+
+    System.out.println("v10 was changed:"+v10);
+    System.out.println("after v10 changed:"+In4);
+
+
 
 
 

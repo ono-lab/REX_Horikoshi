@@ -51,7 +51,7 @@ public class TIndivisual{
 		return fVector;
 	}
 
-	public void setVector(TVector v) {
+	public void setVector(TVector v) {//不要
 		fVector = v;
 	}
 }
