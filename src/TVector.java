@@ -264,7 +264,8 @@ public static void main(String[] args)throws IOException{
 	TIndivisual In1=new TIndivisual();
 	In1.setEvaluationValue(8);
 	System.out.println("EV set :"+In1);
-	In1.setVector(v1);
+
+	In1.getVector().copyFrom(v1);
 	System.out.println("Vector set:"+In1);
 	System.out.println("EV of In1:"+In1.getEvaluationValue());
 	System.out.println("vector of In1:"+In1.getVector());
@@ -295,31 +296,6 @@ public static void main(String[] args)throws IOException{
 
     System.out.println("In3, cloned:"+In3+"\r\n");
 
-
-    System.out.println("set vector without setVector(v)\r\n");
-
-    TVector v10= new TVector();
-
-    v10.setDimension(5);
-    for(int i=0;i<v10.getDimension();++i) {
-    	v10.setElement(i,i*2+6);
-    }
-
-    System.out.println("Generated vector v10:"+v10);
-
-    TIndivisual In4= new TIndivisual();
-
-    In4.setEvaluationValue(33.4);
-    In4.getVector().copyFrom(v10);
-
-    System.out.println("set vector v10:"+In4+"\r\n");
-
-    v10.setElement(1,9999);
-
-
-
-    System.out.println("v10 was changed:"+v10);
-    System.out.println("after v10 changed:"+In4);
 
 
 
