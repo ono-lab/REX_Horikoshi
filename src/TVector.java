@@ -46,7 +46,7 @@ public class TVector {
 			pw.print(fData[i]+" ");
 		}
 		pw.println();
-		pw.close();
+
 	}
 
 	public void readFrom(BufferedReader br) throws IOException {
@@ -147,154 +147,128 @@ public class TVector {
 		return this;
 	}
 
+	public static void main(String[]args)throws IOException{
+		System.out.println("Test start\r\n");
+
+		System.out.println("generate vector v1");
+
+		TVector v1=new TVector();
+		String string1=v1.toString();
+		System.out.println("just new v1:"+string1);
+
+		v1.setDimension(4);
+		for(int i=0;i<v1.getDimension();++i){
+			double l=i*2.5;
+			v1.setElement(i, l);
+		}
+
+		String string2=v1.toString();
+		System.out.println("Dimension, elements was set v1:"+string2+"\r\n");
+
+		System.out.println("copy test");
+
+
+		TVector v2=new TVector(v1);
+
+		TVector v3=new TVector();
+		v3=v1.clone();
+
+		TVector v4 =new TVector();
+		v4=v1;
+
+		TVector v5 = new TVector();
+		v5=v1.copyFrom(v1);
+
+		TVector v6= new TVector();
+		v6=v6.copyFrom(v1);
+
+		File file = new File("testVector.txt");
+	    FileWriter filewriter = new FileWriter(file);
+	    BufferedWriter bw = new BufferedWriter(filewriter);
+	    PrintWriter pw = new PrintWriter(bw);
+
+
+
+	    v1.writeTo(pw);
+	    pw.close();
+
+	    TVector v7 =new TVector();
+	    try{
+	        	File f = new File("testVector.txt");
+	        	FileReader fr = new FileReader(f);
+	        	BufferedReader br = new BufferedReader(fr);
+
+	        	v7.readFrom(br);
+	    	}catch(FileNotFoundException e){
+	    		System.out.println(e);
+	    	}
+
+
+
+
+		System.out.println("Compared with v1");
+
+
+		System.out.println("TVector(v1);"+v1.equals(v2));
+		System.out.println("v1.clone();"+v1.equals(v3));
+		System.out.println("v4=v1;"+v1.equals(v4));
+		System.out.println("v1.copyFrom(v1);"+v1.equals(v5));
+		System.out.println("v6.copuFrom(v1);"+v1.equals(v6));
+		System.out.println("Write,read;"+v1.equals(v7)+"\r\n");
+
+		System.out.println("v1 is changed\r\n");
+
+		v1.setElement(2, 10);
+		System.out.println("v1:"+v1);
+
+		System.out.println("TVector(v1);"+v1.equals(v2));
+		System.out.println("v1.clone();"+v1.equals(v3));
+		System.out.println("v4=v1;"+v1.equals(v4));
+		System.out.println("v1.copyFrom(v1);"+v1.equals(v5));
+		System.out.println("v6.copuFrom(v1);"+v1.equals(v6));
+		System.out.println("Write,read;"+v1.equals(v7)+"\r\n");
+
+
+		System.out.println("generate new vector v8"+"\r\n");
+
+		TVector v8=new TVector();
+		v8.setDimension(4);
+		for(int i=0;i<v8.getDimension();++i ){
+			v8.setElement(i,6);
+		}
+
+		TVector v9=new TVector();
+		v9=v1.clone();
+
+		System.out.println("v1:"+v9);
+		System.out.println("v8:"+v8);
+		System.out.println("v1+v8:"+v9.add(v8));
+		v9=v1.clone();
+		System.out.println("v1-v8:"+v9.subtract(v8));
+		v9=v1.clone();
+		System.out.println("normalized v1:"+v9.normalize());
+		System.out.println("Norm of normalized:"+v9.calculateL2norm());
+
+		v9=v1.clone();
+		System.out.println("naiseki v1 and v8"+v9.innerProduct(v8));
+		System.out.println("v1*4="+v9.scalarProduct(4));
+		v9=v1.clone();
+		System.out.println("elementwise product v1 and v8 ="+v9.elementwiseProduct(v8)+"\r\n");
+
+		TVector tes1=new TVector();
+		TVector tes2=new TVector();
+
+		tes1.setDimension(1);
+		tes2.setDimension(1);
+
+		tes1.setElement(0, 3);
+		tes2.setElement(0, 5);
+		System.out.println(tes1.subtract(tes2).scalarProduct(10));
+	}
+
+
 }
 
-class Test{
-public static void main(String[] args)throws IOException{
-
-	System.out.println("Test start\r\n");
-
-	System.out.println("generate vector v1");
-
-	TVector v1=new TVector();
-	String string1=v1.toString();
-	System.out.println("just new v1:"+string1);
-
-	v1.setDimension(4);
-	for(int i=0;i<v1.getDimension();++i){
-		double l=i*2.5;
-		v1.setElement(i, l);
-	}
-
-	String string2=v1.toString();
-	System.out.println("Dimension, elements was set v1:"+string2+"\r\n");
-
-	System.out.println("copy test");
-
-
-	TVector v2=new TVector(v1);
-
-	TVector v3=new TVector();
-	v3=v1.clone();
-
-	TVector v4 =new TVector();
-	v4=v1;
-
-	TVector v5 = new TVector();
-	v5=v1.copyFrom(v1);
-
-	TVector v6= new TVector();
-	v6=v6.copyFrom(v1);
-
-	File file = new File("test1.txt");
-    FileWriter filewriter = new FileWriter(file);
-    BufferedWriter bw = new BufferedWriter(filewriter);
-    PrintWriter pw = new PrintWriter(bw);
-
-
-
-    v1.writeTo(pw);
-
-    TVector v7 =new TVector();
-    try{
-        	File f = new File("test1.txt");
-        	FileReader fr = new FileReader(f);
-        	BufferedReader br = new BufferedReader(fr);
-
-        	v7.readFrom(br);
-    	}catch(FileNotFoundException e){
-    		System.out.println(e);
-    	}
-
-
-
-
-	System.out.println("Compared with v1");
-
-
-	System.out.println("TVector(v1);"+v1.equals(v2));
-	System.out.println("v1.clone();"+v1.equals(v3));
-	System.out.println("v4=v1;"+v1.equals(v4));
-	System.out.println("v1.copyFrom(v1);"+v1.equals(v5));
-	System.out.println("v6.copuFrom(v1);"+v1.equals(v6));
-	System.out.println("Write,read;"+v1.equals(v7)+"\r\n");
-
-	System.out.println("v1 is changed\r\n");
-
-	v1.setElement(2, 10);
-	System.out.println("v1:"+v1);
-
-	System.out.println("TVector(v1);"+v1.equals(v2));
-	System.out.println("v1.clone();"+v1.equals(v3));
-	System.out.println("v4=v1;"+v1.equals(v4));
-	System.out.println("v1.copyFrom(v1);"+v1.equals(v5));
-	System.out.println("v6.copuFrom(v1);"+v1.equals(v6));
-	System.out.println("Write,read;"+v1.equals(v7)+"\r\n");
-
-
-	System.out.println("generate new vector v8"+"\r\n");
-
-	TVector v8=new TVector();
-	v8.setDimension(4);
-	for(int i=0;i<v8.getDimension();++i ){
-		v8.setElement(i,6);
-	}
-
-	TVector v9=new TVector();
-	v9=v1.clone();
-
-	System.out.println("v1:"+v9);
-	System.out.println("v8:"+v8);
-	System.out.println("v1+v8:"+v9.add(v8));
-	v9=v1.clone();
-	System.out.println("v1-v8:"+v9.subtract(v8));
-	v9=v1.clone();
-	System.out.println("normalized v1:"+v9.normalize());
-	System.out.println("Norm of normalized:"+v9.calculateL2norm());
-
-	v9=v1.clone();
-	System.out.println("naiseki v1 and v8"+v9.innerProduct(v8));
-	System.out.println("v1*4="+v9.scalarProduct(4));
-	v9=v1.clone();
-	System.out.println("elementwise product v1 and v8 ="+v9.elementwiseProduct(v8)+"\r\n");
-
-
-	System.out.println("Indivisual test"+"\r\n");
-
-	TIndivisual In1=new TIndivisual();
-	In1.setEvaluationValue(8);
-	System.out.println("EV set :"+In1);
-
-	In1.getVector().copyFrom(v1);
-	System.out.println("Vector set:"+In1);
-	System.out.println("EV of In1:"+In1.getEvaluationValue());
-	System.out.println("vector of In1:"+In1.getVector());
-
-	File file2 = new File("test2.txt");
-    FileWriter filewriter2 = new FileWriter(file2);
-    BufferedWriter bw2 = new BufferedWriter(filewriter2);
-    PrintWriter pw2 = new PrintWriter(bw2);
-
-    In1.writeTo(pw2);
-
-    TIndivisual In2 =new TIndivisual();
-    try{
-
-        	FileReader fr2 = new FileReader(file2);
-        	BufferedReader br2 = new BufferedReader(fr2);
-
-        	In2.readFrom(br2);
-        	System.out.println("In2, read from:"+In2);
-
-    	}catch(FileNotFoundException e){
-    		System.out.println(e);
-    	}
-
-    TIndivisual In3 =new TIndivisual();
-
-    In3 = In1.clone();
-
-    System.out.println("In3, cloned:"+In3+"\r\n");
 
 
 
@@ -304,15 +278,6 @@ public static void main(String[] args)throws IOException{
 
 
 
-
-
-
-
-
-
-
-
-}}
 
 
 
